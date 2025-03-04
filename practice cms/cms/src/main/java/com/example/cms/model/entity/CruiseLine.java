@@ -30,8 +30,8 @@ public class CruiseLine {
     @NotNull
     private String cruiseName;
 
-//    @NotNull
-//    private ArrayList<String> cruiseFeatures;
+    @NotNull
+    private String cruiseFeatures;
 
 
 }

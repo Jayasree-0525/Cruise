@@ -1,6 +1,6 @@
 INSERT INTO question(questionId, question) VALUES (1, 'How old are you?');
 --INSERT INTO cruiseLine(cruiseId, duration, cruiseName, cruiseFeatures) VALUES (1, 5, 'Cruise One', 'pool');
-INSERT INTO cruiseLine(cruiseId, duration, cruiseName) VALUES (1, 5, 'Cruise One');
+INSERT INTO cruiseLine(cruiseId, duration, cruiseName, cruiseFeatures) VALUES (1, 5, 'Cruise One', 'water slide');
 INSERT INTO customer(id, age, gender) VALUES (1, 25, 'Female');
 
 INSERT INTO survey (surveyId, cruiseId, customerId, questionId, question, qualitativeAnswer, quantitativeAnswer) VALUES(101, 1, 1, 1, 'How was your experience overall, on a scale of 1 to 5 from worst to best?', '', 5);
