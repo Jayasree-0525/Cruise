@@ -20,6 +20,8 @@ import java.util.ArrayList;
 @Table(name = "CruiseLine")
 public class CruiseLine {
 
+    //test comment to try commit
+
     @Id
     @NotNull
     private int cruiseId;
