@@ -18,10 +18,10 @@ import javax.persistence.Table;
 
 public class Customer extends Person{
 
-
     @Nullable
     private int age;
 
     @Nullable
     private String gender;
+
 }

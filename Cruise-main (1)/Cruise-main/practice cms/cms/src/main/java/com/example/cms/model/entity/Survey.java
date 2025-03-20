@@ -20,35 +20,42 @@ import java.util.List;
 @Table(name = "Survey")
 public class Survey {
 
+    //@Embedded
     @Id
     private int surveyId;
 
-    @ManyToOne
-//    @MapsId("customerId")
+    @OneToMany
+    @MapsId("customerId")
     @JoinColumn(name = "customerId")
     private Customer customer;
 
-    @ManyToOne
-//    @MapsId("cruiseId")
-    @JoinColumn(name = "cruiseId")
-    private CruiseLine cruiseLine;
+    @OneToMany
+    @MapsId("responseId")
+    @JoinColumn(name = "responseId")
+    private Response response;
 
 
-    //@OneToMany(mappedBy = "Question")
-    //private List<Question> listOfQuestions = new ArrayList<>();
+    @OneToMany
+    @MapsId("questionId")
+    @JoinColumn(name = "questionId")
+    private Question question;
+
+
+    //@ManyToMany(mappedBy = "Question")
+   // private List<Question> listOfQuestions = new ArrayList<>();
 
 
     //private Question q; <- got rid of Question entity
-    @NotNull
-    private int questionId;
+    //@NotNull
+    //private int questionId;
 
-    @NotNull
-    private String question;
+    //@NotNull
+    //private String question;
 
-    @Nullable
-    private String qualitativeAnswer;
+    //@Nullable
+    //private String qualitativeAnswer;
 
-    @Nullable
-    private Float quantitativeAnswer;
+   // @Nullable
+    //private Float quantitativeAnswer;
 
 }

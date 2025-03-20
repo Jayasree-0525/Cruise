@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +18,24 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "Question")
+@Table(name = "questions")
 public class Question {
 
     @Id
+    @NotEmpty
     private int questionId;
 
-
+    @NotEmpty
     private String question;
 
+    @NotEmpty
     private String type; // qualitative or quantitative
+
+    public Question(int questionId, String question, String type){
+        this.questionId = questionId;
+        this.question = question;
+        this.type = type;
+    }
 
     //@OneToMany(mappedBy = "Response")
     //@Nullable

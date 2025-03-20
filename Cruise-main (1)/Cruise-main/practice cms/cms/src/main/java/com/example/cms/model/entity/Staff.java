@@ -14,7 +14,8 @@ import javax.persistence.Table;
 @Setter
 @Table(name = "Staff")
 public class Staff extends Person{
-
+// make staff controller, add attributes (e.g. position)
+    private String position;
 }
 
 

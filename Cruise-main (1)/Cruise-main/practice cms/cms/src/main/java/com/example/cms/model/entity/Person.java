@@ -19,5 +19,14 @@ public abstract class Person {
     @Id
     private long id;
 
+    @NotEmpty
+    private String firstName;
+
+    @NotEmpty
+    private String lastName;
+
+    @NotEmpty
+    private String email;
+
 
 }

@@ -48,7 +48,7 @@ public class SurveyController {
     }
 
     @GetMapping("/surveys")
-    List<Survey> retrieveAllDepartments() {
+    List<Survey> retrieveAllSurveys() {
         return repository.findAll();
     }
 
@@ -68,5 +68,8 @@ public class SurveyController {
         newCourse.setProfessor(professor);
         return repository.save(newCourse);
     }*/
+
+    @DeleteMapping("/surveys/{id}")
+    void deleteSurvey(@PathVariable("id") String surveyId) {repository.deleteById(surveyId);}
 
 }
