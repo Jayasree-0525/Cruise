@@ -20,25 +20,34 @@ import java.util.List;
 @Table(name = "Survey")
 public class Survey {
 
-    //@Embedded
-    @Id
+    @Embedded
     private int surveyId;
+    //@Id
 
+
+    //Isn't this OneToOne relationship??
     @OneToMany
     @MapsId("customerId")
     @JoinColumn(name = "customerId")
     private Customer customer;
+
+
+    @ManyToOne
+    @MapsId("cruiseId")
+    @JoinColumn(name = "cruiseId")
+    private CruiseLine cruise;
+
 
     @OneToMany
     @MapsId("responseId")
     @JoinColumn(name = "responseId")
     private Response response;
 
-
-    @OneToMany
+    /*
+    @ManyToMany
     @MapsId("questionId")
     @JoinColumn(name = "questionId")
-    private Question question;
+    private Question question;*/
 
 
     //@ManyToMany(mappedBy = "Question")
@@ -52,10 +61,11 @@ public class Survey {
     //@NotNull
     //private String question;
 
-    //@Nullable
-    //private String qualitativeAnswer;
+    //uncommented Mar 21
+    /*@Nullable
+    private String qualitativeAnswer;
 
-   // @Nullable
-    //private Float quantitativeAnswer;
+    @Nullable
+    private Float quantitativeAnswer;*/
 
 }

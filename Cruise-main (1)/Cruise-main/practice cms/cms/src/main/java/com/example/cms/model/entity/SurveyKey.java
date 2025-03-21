@@ -11,25 +11,25 @@ import java.io.Serializable;
 @Embeddable
 @Getter
 @Setter
-public class ResponseKey implements Serializable {
+public class SurveyKey implements Serializable {
 
     @Column(name = "customerId")
     int customerId;
 
-    @Column(name = "questionId")
-    int questionId;
+    @Column(name = "cruiseId")
+    int cruiseId;
 
 
     @Override
     public int hashCode() {
-        String concatString = String.valueOf(customerId.hashCode()) + String.valueOf(questionId.hashCode());
+        String concatString = String.valueOf(customerId.hashCode()) + String.valueOf(cruiseId.hashCode());
         return concatString.hashCode();
     }
-    public ResponseKey(){}
+    public SurveyKey(){}
 
-    public ResponseKey(int customerId, int questionId){
-        this.setCustomerId(customerId);
-        this.setQuestionId(questionId);
+    public SurveyKey(int customerId, int cruiseId){
+        this.setcustomerId(customerId);
+        this.setcruiseId(cruiseId);
     }
 
     @Override
@@ -39,10 +39,10 @@ public class ResponseKey implements Serializable {
         }
         if (o == this)
             return true;
-        if (!(o instanceof ResponseKey))
+        if (!(o instanceof SurveyKey))
             return false;
-        ResponseKey other = (ResponseKey) o;
-        return (customerId==(other.customerId)) && (questionId == (other.questionId));
+        SurveyKey other = (SurveyKey) o;
+        return customerId.equals(other.customerId) && cruiseId.equals(other.cruiseId);
     }
 
 }

@@ -1,6 +1,5 @@
-package com.example.cms.controller;
+package com.example.cms.controller.exceptions;
 
-import com.example.cms.controller.exceptions.DepartmentNotFoundException;
 import com.example.cms.model.entity.Customer;
 import com.example.cms.model.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
