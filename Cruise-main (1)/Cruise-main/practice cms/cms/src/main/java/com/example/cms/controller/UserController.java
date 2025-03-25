@@ -14,11 +14,11 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
-
 public class UserController {
-    @Autowired
+
     private final UserRepository repository;
 
+    @Autowired
     public UserController(UserRepository repository) {
         this.repository = repository;
     }
@@ -28,7 +28,8 @@ public class UserController {
         String username = credentials.get("username");
         String password = credentials.get("password");
 
-        User user = UserRepository.findByUsername(username)
+        // Use 'repository' to call 'findByUsername'
+        User user = repository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (!password.equals(user.getPassword())) {

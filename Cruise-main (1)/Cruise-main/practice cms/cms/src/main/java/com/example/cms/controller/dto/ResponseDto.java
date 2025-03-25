@@ -13,9 +13,11 @@ import java.util.List;
 @Setter
 public class ResponseDto {
 
-    private int customerId;
+    private int surveyId;
     private int questionId;
     private String response;
+
+
 
 }
 

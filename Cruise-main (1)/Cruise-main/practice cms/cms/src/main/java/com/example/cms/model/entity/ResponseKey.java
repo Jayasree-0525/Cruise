@@ -22,7 +22,7 @@ public class ResponseKey implements Serializable {
 
     @Override
     public int hashCode() {
-        String concatString = String.valueOf(surveyId.hashCode()) + String.valueOf(questionId.hashCode());
+        String concatString = String.valueOf(surveyId) + String.valueOf(questionId);
         return concatString.hashCode();
     }
     public ResponseKey(){}

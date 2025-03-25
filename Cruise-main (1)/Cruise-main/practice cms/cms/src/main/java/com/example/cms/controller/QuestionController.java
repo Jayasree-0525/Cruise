@@ -41,7 +41,7 @@ public class QuestionController {
                     return repository.save(question);
                 })
                 .orElseGet(() -> {
-                    newQuestion.setId(questionId);
+                    newQuestion.setQuestionId(questionId);
                     newQuestion.setQuestion(newQuestion.getQuestion());
                     newQuestion.setType(newQuestion.getType());
                     return repository.save(newQuestion);
