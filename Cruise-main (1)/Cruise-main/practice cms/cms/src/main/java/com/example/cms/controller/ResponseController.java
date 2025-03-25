@@ -1,14 +1,15 @@
 package com.example.cms.controller;
 
 import com.example.cms.controller.dto.ResponseDto;
-import com.example.cms.controller.exceptions.CustomerNotFoundException;
+import com.example.cms.controller.exceptions.SurveyNotFoundException;
 import com.example.cms.controller.exceptions.ResponseNotFoundException;
 import com.example.cms.controller.exceptions.QuestionNotFoundException;
-import com.example.cms.model.entity.Customer;
+import com.example.cms.model.entity.Survey;
 import com.example.cms.model.entity.Question;
 import com.example.cms.model.entity.Response;
 import com.example.cms.model.entity.ResponseKey;
-import com.example.cms.model.repository.CustomerRepository;
+import com.example.cms.model.repository.QuestionRepository;
+import com.example.cms.model.repository.SurveyRepository;
 import com.example.cms.model.repository.ResponseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class ResponseController {
     private final ResponseRepository repository;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private SurveyRepository surveyRepository;
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -59,15 +60,15 @@ public class ResponseController {
                 });
     }
 
-    @PutMapping("/marks/{customerId}/{questionId}")
-    Response updateResponse(@RequestBody ResponseDto responseDto, @PathVariable("customerId") int customerId, @PathVariable("questionId") int questionId) {
-        return repository.findById(new ResponseKey(customerId, questionId))
+    @PutMapping("/marks/{surveyId}/{questionId}")
+    Response updateResponse(@RequestBody ResponseDto responseDto, @PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
+        return repository.findById(new ResponseKey(surveyId, questionId))
                 .map(response -> {
-                    response.setResponseId(new ResponseKey(responseDto.getCustomerId(), responseDto.getQuestionId()));
+                    response.setResponseId(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));
 
-                    Customer customer = customerRepository.findById(reponseDto.getCustomerId()).orElseThrow(
-                            () -> new com.example.cms.controller.CustomerNotFoundException(reponseDto.getCustomerId()));
-                    response.setCustomer(customer);
+                    Survey survey = surveyRepository.findById(reponseDto.getSurveyId()).orElseThrow(
+                            () -> new com.example.cms.controller.SurveyNotFoundException(reponseDto.getSurveyId()));
+                    response.setSurvey(survey);
 
                     Question question = questionRepository.findById(reponseDto.getQuestionId()).orElseThrow(
                             () -> new QuestionNotFoundException(reponseDto.getQuestionId()));
@@ -82,11 +83,11 @@ public class ResponseController {
 
                 .orElseGet(() -> {
                     Response response = new Response();
-                    response.setResponseId(new ResponseKey(responseDto.getCustomerId(), responseDto.getQuestionId()));
+                    response.setResponseId(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));
 
-                    Customer customer = customerRepository.findById(reponseDto.getCustomerId()).orElseThrow(
-                            () -> new CustomerNotFoundException(reponseDto.getCustomerId()));
-                    response.setCustomer(customer);
+                    Survey survey = surveyRepository.findById(reponseDto.getSurveyId()).orElseThrow(
+                            () -> new SurveyNotFoundException(reponseDto.getSurveyId()));
+                    response.setSurvey(survey);
 
                     Question question = questionRepository.findById(reponseDto.getQuestionId()).orElseThrow(
                             () -> new QuestionNotFoundException(reponseDto.getQuestionId()));

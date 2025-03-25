@@ -19,9 +19,9 @@ public class Response {
     ResponseKey responseId;
 
     @ManyToOne
-    @MapsId("customerId")
-    @JoinColumn(name = "customerId")
-    private Customer customer;
+    @MapsId("surveyId")
+    @JoinColumn(name = "surveyId")
+    private Survey survey;
 
     @ManyToOne
     @MapsId("questionId")

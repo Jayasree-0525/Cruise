@@ -1,16 +1,10 @@
 package com.example.cms.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
@@ -20,28 +14,23 @@ import java.util.List;
 @Table(name = "Survey")
 public class Survey {
 
-    @Embedded
+    @Id
     private int surveyId;
-    //@Id
 
-
-    //Isn't this OneToOne relationship??
-    @OneToMany
+    @ManyToOne
     @MapsId("customerId")
     @JoinColumn(name = "customerId")
     private Customer customer;
 
-
     @ManyToOne
     @MapsId("cruiseId")
     @JoinColumn(name = "cruiseId")
-    private CruiseLine cruise;
+    private Cruise cruise;
 
-
-    @OneToMany
-    @MapsId("responseId")
-    @JoinColumn(name = "responseId")
-    private Response response;
+    //@OneToMany
+   // @MapsId("responseId")
+   // @JoinColumn(name = "responseId")
+    //private Response response;
 
     /*
     @ManyToMany

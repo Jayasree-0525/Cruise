@@ -13,8 +13,8 @@ import java.io.Serializable;
 @Setter
 public class ResponseKey implements Serializable {
 
-    @Column(name = "customerId")
-    int customerId;
+    @Column(name = "surveyId")
+    int surveyId;
 
     @Column(name = "questionId")
     int questionId;
@@ -22,13 +22,13 @@ public class ResponseKey implements Serializable {
 
     @Override
     public int hashCode() {
-        String concatString = String.valueOf(customerId.hashCode()) + String.valueOf(questionId.hashCode());
+        String concatString = String.valueOf(surveyId.hashCode()) + String.valueOf(questionId.hashCode());
         return concatString.hashCode();
     }
     public ResponseKey(){}
 
-    public ResponseKey(int customerId, int questionId){
-        this.setCustomerId(customerId);
+    public ResponseKey(int surveyId, int questionId){
+        this.setSurveyId(surveyId);
         this.setQuestionId(questionId);
     }
 
@@ -42,7 +42,7 @@ public class ResponseKey implements Serializable {
         if (!(o instanceof ResponseKey))
             return false;
         ResponseKey other = (ResponseKey) o;
-        return (customerId==(other.customerId)) && (questionId == (other.questionId));
+        return (surveyId==(other.surveyId)) && (questionId == (other.questionId));
     }
 
 }

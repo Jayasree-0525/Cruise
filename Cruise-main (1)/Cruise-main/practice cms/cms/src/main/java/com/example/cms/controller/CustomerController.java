@@ -1,4 +1,4 @@
-package com.example.cms.controller.exceptions;
+package com.example.cms.controller;
 
 import com.example.cms.model.entity.Customer;
 import com.example.cms.model.repository.CustomerRepository;
