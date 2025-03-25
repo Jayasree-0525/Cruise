@@ -29,7 +29,7 @@ public class Cruise {
     private String cruiseName;
 
     @NotNull
-    private String cruiseFeatures;
+    private String destination;
 
 
 }

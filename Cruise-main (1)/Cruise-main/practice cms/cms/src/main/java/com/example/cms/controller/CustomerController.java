@@ -33,8 +33,8 @@ public class CustomerController {
     void deleteCustomer(@PathVariable("id") String customerId) {repository.deleteById(customerId);}
 
     @PutMapping("/customers/{id}")
-    Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable("id") String customerId){
-        return repository.findById(customerId)
+    Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable("id") int customerId){
+        return repository.findById(String.valueOf(customerId))
                 .map(customer -> {
                     customer.setFirstName(newCustomer.getFirstName());
                     customer.setLastName(newCustomer.getLastName());

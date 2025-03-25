@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -16,6 +17,9 @@ public class Survey {
 
     @Id
     private int surveyId;
+
+    @NotEmpty
+    private String date;
 
     @ManyToOne
     @MapsId("customerId")
