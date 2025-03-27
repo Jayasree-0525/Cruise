@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "Cruise")
+@Table(name = "cruise")
 public class Cruise {
 
     @Id

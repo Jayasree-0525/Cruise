@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "Staff")
+@Table(name = "staff")
 public class Staff extends Person{
 // make staff controller, add attributes (e.g. position)
     private String position;

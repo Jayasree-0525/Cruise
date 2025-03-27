@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "Customer")
+@Table(name = "customer")
 
 public class Customer extends Person{
 

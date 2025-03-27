@@ -30,7 +30,15 @@ public class SurveyController {
 
 package com.example.cms.controller;
 
-import com.example.cms.model.entity.Survey;
+import com.example.cms.controller.dto.ResponseDto;
+import com.example.cms.controller.dto.SurveyDto;
+import com.example.cms.controller.exceptions.CruiseNotFoundException;
+import com.example.cms.controller.exceptions.CustomerNotFoundException;
+import com.example.cms.controller.exceptions.QuestionNotFoundException;
+import com.example.cms.controller.exceptions.SurveyNotFoundException;
+import com.example.cms.model.entity.*;
+import com.example.cms.model.repository.CruiseRepository;
+import com.example.cms.model.repository.CustomerRepository;
 import com.example.cms.model.repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +51,12 @@ public class SurveyController {
     @Autowired
     private final SurveyRepository repository;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private CruiseRepository cruiseRepository;
+
     public SurveyController(SurveyRepository repository) {
         this.repository = repository;
     }
@@ -52,24 +66,24 @@ public class SurveyController {
         return repository.findAll();
     }
 
-    @PostMapping("/survey")
-    Survey createSurvey(@RequestBody Survey newSurvey) {
+    @PostMapping("/surveys")
+    Survey createSurvey(@RequestBody SurveyDto surveyDto) {
+        Survey newSurvey = new Survey();
+        newSurvey.setSurveyId(surveyDto.getSurveyId());
+
+        Customer customer = customerRepository.findById(surveyDto.getCustomerId()).orElseThrow(
+                () -> new CustomerNotFoundException(surveyDto.getCustomerId()));
+        newSurvey.setCustomer(customer);
+
+        Cruise cruise = cruiseRepository.findById(surveyDto.getCruiseId()).orElseThrow(
+                () -> new CruiseNotFoundException(surveyDto.getCruiseId()));
+        newSurvey.setCruise(cruise);
+
+        newSurvey.setDateOfSurvey(surveyDto.getDateOfSurvey());
         return repository.save(newSurvey);
     }
 
-
-    /*@PostMapping("/courses")
-    Course createCourse(@RequestBody CourseDto courseDto) {
-        Course newCourse = new Course();
-        newCourse.setName(courseDto.getName());
-        newCourse.setCode(courseDto.getCode());
-        Professor professor = professorRepository.findById(courseDto.getProfessorId()).orElseThrow(
-                () -> new ProfessorNotFoundException(courseDto.getProfessorId()));
-        newCourse.setProfessor(professor);
-        return repository.save(newCourse);
-    }*/
-
     @DeleteMapping("/surveys/{id}")
-    void deleteSurvey(@PathVariable("id") String surveyId) {repository.deleteById(surveyId);}
+    void deleteSurvey(@PathVariable("id") int surveyId) {repository.deleteById(surveyId);}
 
 }

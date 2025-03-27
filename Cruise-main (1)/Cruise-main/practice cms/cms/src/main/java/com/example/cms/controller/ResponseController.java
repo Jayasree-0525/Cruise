@@ -38,7 +38,19 @@ public class ResponseController {
     }
 
     @PostMapping("/responses")
-    Response createResponse(@RequestBody Response newResponse) {
+    Response createResponse(@RequestBody ResponseDto responseDto) {
+        Response newResponse = new Response();
+        newResponse.setResponseId(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));
+
+        Survey survey = surveyRepository.findById(responseDto.getSurveyId()).orElseThrow(
+                () -> new SurveyNotFoundException(responseDto.getSurveyId()));
+        newResponse.setSurvey(survey);
+
+        Question question = questionRepository.findById(responseDto.getQuestionId()).orElseThrow(
+                () -> new QuestionNotFoundException(responseDto.getQuestionId()));
+        newResponse.setQuestion(question);
+
+        newResponse.setResponse(responseDto.getResponse());
         return repository.save(newResponse);
     }
 
@@ -59,17 +71,17 @@ public class ResponseController {
                 });
     }*/
 
-    @PutMapping("/marks/{surveyId}/{questionId}")
+    @PutMapping("/responses/{surveyId}/{questionId}")
     Response updateResponse(@RequestBody ResponseDto responseDto, @PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
         return repository.findById(new ResponseKey(surveyId, questionId))
                 .map(response -> {
                     response.setResponseId(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));
 
-                    Survey survey = surveyRepository.findById(String.valueOf(responseDto.getSurveyId())).orElseThrow(
+                    Survey survey = surveyRepository.findById(responseDto.getSurveyId()).orElseThrow(
                             () -> new SurveyNotFoundException(responseDto.getSurveyId()));
                     response.setSurvey(survey);
 
-                    Question question = questionRepository.findById(String.valueOf(responseDto.getQuestionId())).orElseThrow(
+                    Question question = questionRepository.findById(responseDto.getQuestionId()).orElseThrow(
                             () -> new QuestionNotFoundException(responseDto.getQuestionId()));
                     response.setQuestion(question);
 
@@ -84,11 +96,11 @@ public class ResponseController {
                     Response response = new Response();
                     response.setResponseId(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));
 
-                    Survey survey = surveyRepository.findById(String.valueOf(responseDto.getSurveyId())).orElseThrow(
+                    Survey survey = surveyRepository.findById(responseDto.getSurveyId()).orElseThrow(
                             () -> new SurveyNotFoundException(responseDto.getSurveyId()));
                     response.setSurvey(survey);
 
-                    Question question = questionRepository.findById(String.valueOf(responseDto.getQuestionId())).orElseThrow(
+                    Question question = questionRepository.findById(responseDto.getQuestionId()).orElseThrow(
                             () -> new QuestionNotFoundException(responseDto.getQuestionId()));
                     response.setQuestion(question);
 

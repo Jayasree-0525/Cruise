@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SurveyRepository extends JpaRepository<Survey, String>{
+public interface SurveyRepository extends JpaRepository<Survey, Integer>{
     //List<Survey> findAll();
 }

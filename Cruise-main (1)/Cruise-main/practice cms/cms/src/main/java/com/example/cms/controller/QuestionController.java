@@ -30,11 +30,11 @@ public class QuestionController {
     }
 
     @DeleteMapping("/questions/{id}")
-    void deleteQuestion(@PathVariable("id") String questionId) {repository.deleteById(questionId);}
+    void deleteQuestion(@PathVariable("id") int questionId) {repository.deleteById(questionId);}
 
     @PutMapping("/questions/{id}")
     Question updateQuestion(@RequestBody Question newQuestion, @PathVariable("id") int questionId){
-        return repository.findById(String.valueOf(questionId))
+        return repository.findById(questionId)
                 .map(question -> {
                     question.setQuestion(newQuestion.getQuestion());
                     question.setType(newQuestion.getType());
