@@ -24,10 +24,8 @@ public class CustomerController {
         return repository.findAll();
     }
 
-    @PostMapping("/customer")
-    Customer createCustomer(@RequestBody Customer newCustomer) {
-        return repository.save(newCustomer);
-    }
+    @PostMapping("/customers")
+    Customer createCustomer(@RequestBody Customer newCustomer) {return repository.save(newCustomer);}
 
     @DeleteMapping("/customers/{id}")
     void deleteCustomer(@PathVariable("id") int customerId) {repository.deleteById(customerId);}

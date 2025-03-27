@@ -70,20 +70,46 @@ public class SurveyController {
     Survey createSurvey(@RequestBody SurveyDto surveyDto) {
         Survey newSurvey = new Survey();
         newSurvey.setSurveyId(surveyDto.getSurveyId());
-
         Customer customer = customerRepository.findById(surveyDto.getCustomerId()).orElseThrow(
                 () -> new CustomerNotFoundException(surveyDto.getCustomerId()));
         newSurvey.setCustomer(customer);
-
         Cruise cruise = cruiseRepository.findById(surveyDto.getCruiseId()).orElseThrow(
                 () -> new CruiseNotFoundException(surveyDto.getCruiseId()));
         newSurvey.setCruise(cruise);
-
         newSurvey.setDateOfSurvey(surveyDto.getDateOfSurvey());
         return repository.save(newSurvey);
     }
 
     @DeleteMapping("/surveys/{id}")
     void deleteSurvey(@PathVariable("id") int surveyId) {repository.deleteById(surveyId);}
+
+    @PutMapping("/surveys/{id}")
+    Survey updateSurvey(@RequestBody SurveyDto surveyDto, @PathVariable("id") int surveyId) {
+        return repository.findById(surveyId)
+                .map(survey -> {
+                    survey.setSurveyId(surveyDto.getSurveyId());
+                    Customer customer = customerRepository.findById(surveyDto.getCustomerId()).orElseThrow(
+                            () -> new CustomerNotFoundException(surveyDto.getCustomerId()));
+                    survey.setCustomer(customer);
+
+                    Cruise cruise = cruiseRepository.findById(surveyDto.getCruiseId()).orElseThrow(
+                            () -> new CruiseNotFoundException(surveyDto.getCruiseId()));
+                    survey.setCruise(cruise);
+                    survey.setDateOfSurvey(surveyDto.getDateOfSurvey());
+                    return repository.save(survey);
+                })
+                .orElseGet(() -> {
+                    Survey newSurvey = new Survey();
+                    newSurvey.setSurveyId(surveyDto.getSurveyId());
+                    Customer customer = customerRepository.findById(surveyDto.getCustomerId()).orElseThrow(
+                            () -> new CustomerNotFoundException(surveyDto.getCustomerId()));
+                    newSurvey.setCustomer(customer);
+                    Cruise cruise = cruiseRepository.findById(surveyDto.getCruiseId()).orElseThrow(
+                            () -> new CruiseNotFoundException(surveyDto.getCruiseId()));
+                    newSurvey.setCruise(cruise);
+                    newSurvey.setDateOfSurvey(surveyDto.getDateOfSurvey());
+                    return repository.save(newSurvey);
+                });
+    }
 
 }
