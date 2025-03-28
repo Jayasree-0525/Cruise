@@ -22,7 +22,7 @@ import java.util.List;
 public class Question {
 
     @Id
-    @NotEmpty
+    @NotNull
     private int questionId;
 
     @NotEmpty
@@ -30,12 +30,6 @@ public class Question {
 
     @NotEmpty
     private String type; // qualitative or quantitative
-
-    public Question(int questionId, String question, String type){
-        this.questionId = questionId;
-        this.question = question;
-        this.type = type;
-    }
 
     //@OneToMany(mappedBy = "Response")
     //@Nullable

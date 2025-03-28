@@ -52,7 +52,9 @@ public class ResponseController {
     }
 
     @DeleteMapping("/responses/{surveyId}/{questionId}")
-    void deleteResponse(@RequestBody ResponseDto responseDto, @PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {repository.deleteById(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));}
+    void deleteResponse(@RequestBody ResponseDto responseDto, @PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
+        repository.deleteById(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));
+    }
 
     /*@PutMapping("/responses/{id}")
     Response updateResponse(@RequestBody Response newResponse, @PathVariable("id") String responseId){
@@ -146,7 +148,6 @@ public class ResponseController {
     List<Response> searchKeyWord(@PathVariable("searchstring") String searchString) {
         return repository.searchQual(searchString);
     }
-
 
     // qualitative - count rows containing a word
     @GetMapping("/responses/qual/countword/{searchstring}")

@@ -12,7 +12,7 @@ public interface ResponseRepository extends JpaRepository<Response, ResponseKey>
  //Add to response repository
 
     // quantitative - average
-    @Query(value = "select AVG(CAST(response AS float)) from responses" +
+    @Query(value = "select AVG(CAST(response AS float)) from responses " +
             "where questionId = :qId", nativeQuery = true)
     float averageFunc(@Param("qId") int qId);
 

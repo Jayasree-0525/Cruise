@@ -2,6 +2,7 @@ package com.example.cms.controller;
 
 import com.example.cms.model.entity.Customer;
 import com.example.cms.model.repository.CustomerRepository;
+import com.example.cms.model.repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,6 @@ import java.util.List;
 @RestController
 
 public class CustomerController {
-    // test change for Nikita's github
 
     @Autowired
     private final CustomerRepository repository;
@@ -28,7 +28,9 @@ public class CustomerController {
     Customer createCustomer(@RequestBody Customer newCustomer) {return repository.save(newCustomer);}
 
     @DeleteMapping("/customers/{id}")
-    void deleteCustomer(@PathVariable("id") int customerId) {repository.deleteById(customerId);}
+    void deleteCustomer(@PathVariable("id") int customerId) {
+        repository.deleteById(customerId);
+    }
 
     @PutMapping("/customers/{id}")
     Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable("id") int customerId){
