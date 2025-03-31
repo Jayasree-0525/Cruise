@@ -39,6 +39,7 @@ import com.example.cms.controller.exceptions.SurveyNotFoundException;
 import com.example.cms.model.entity.*;
 import com.example.cms.model.repository.CruiseRepository;
 import com.example.cms.model.repository.CustomerRepository;
+import com.example.cms.model.repository.ResponseRepository;
 import com.example.cms.model.repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +57,10 @@ public class SurveyController {
 
     @Autowired
     private CruiseRepository cruiseRepository;
+
+    @Autowired
+    private ResponseRepository responseRepository;
+
 
     public SurveyController(SurveyRepository repository) {
         this.repository = repository;
@@ -81,7 +86,10 @@ public class SurveyController {
     }
 
     @DeleteMapping("/surveys/{id}")
-    void deleteSurvey(@PathVariable("id") int surveyId) {repository.deleteById(surveyId);}
+    void deleteSurvey(@PathVariable("id") int surveyId) {
+        responseRepository.deleteResponsesBySingleSurveyId(surveyId);
+        repository.deleteById(surveyId);
+    }
 
     @PutMapping("/surveys/{id}")
     Survey updateSurvey(@RequestBody SurveyDto surveyDto, @PathVariable("id") int surveyId) {

@@ -52,8 +52,8 @@ public class ResponseController {
     }
 
     @DeleteMapping("/responses/{surveyId}/{questionId}")
-    void deleteResponse(@RequestBody ResponseDto responseDto, @PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
-        repository.deleteById(new ResponseKey(responseDto.getSurveyId(), responseDto.getQuestionId()));
+    void deleteResponse(@PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
+        repository.deleteResponseByQuestionAndSurvey(questionId, surveyId);
     }
 
     /*@PutMapping("/responses/{id}")

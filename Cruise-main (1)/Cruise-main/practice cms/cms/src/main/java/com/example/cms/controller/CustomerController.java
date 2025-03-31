@@ -2,6 +2,7 @@ package com.example.cms.controller;
 
 import com.example.cms.model.entity.Customer;
 import com.example.cms.model.repository.CustomerRepository;
+import com.example.cms.model.repository.ResponseRepository;
 import com.example.cms.model.repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,12 @@ public class CustomerController {
 
     @Autowired
     private final CustomerRepository repository;
+    @Autowired
+    private SurveyRepository surveyRepository;
+    @Autowired
+    private ResponseRepository responseRepository;
+
+
     public CustomerController(CustomerRepository repository) {
         this.repository = repository;
     }
@@ -29,6 +36,9 @@ public class CustomerController {
 
     @DeleteMapping("/customers/{id}")
     void deleteCustomer(@PathVariable("id") int customerId) {
+        List<Integer> surveysIdsByCustomerId = responseRepository.findSurveyIdsByCustomerId(customerId);
+        responseRepository.deleteResponsesBySurveyIds(surveysIdsByCustomerId);
+        surveyRepository.deleteSurveyByCustomerId(customerId);
         repository.deleteById(customerId);
     }
 

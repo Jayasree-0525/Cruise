@@ -55,6 +55,8 @@ INSERT INTO survey (surveyId, customerId, cruiseId, dateOfSurvey) VALUES (7, 12,
 INSERT INTO survey (surveyId, customerId, cruiseId, dateOfSurvey) VALUES (8, 13, 8, 'March 21, 2025');
 INSERT INTO survey (surveyId, customerId, cruiseId, dateOfSurvey) VALUES (9, 14, 9, 'March 26, 2025');
 INSERT INTO survey (surveyId, customerId, cruiseId, dateOfSurvey) VALUES (10, 15, 10, 'March 30, 2025');
+INSERT INTO survey (surveyId, customerId, cruiseId, dateOfSurvey) VALUES (11, 6, 2, 'March 30, 2025');
+INSERT INTO survey (surveyId, customerId, cruiseId, dateOfSurvey) VALUES (12, 6, 3, 'March 11, 2025');
 
 
 -- Responses
@@ -81,6 +83,18 @@ INSERT INTO responses (surveyId, questionId, response) VALUES (4, 2, 'Okay, over
 INSERT INTO responses (surveyId, questionId, response) VALUES (4, 3, '5');
 INSERT INTO responses (surveyId, questionId, response) VALUES (4, 4, 'Delicious!');
 INSERT INTO responses (surveyId, questionId, response) VALUES (4, 5, 'Decent experience');
+
+INSERT INTO responses (surveyId, questionId, response) VALUES (11, 1, '3');
+INSERT INTO responses (surveyId, questionId, response) VALUES (11, 2, 'Fine');
+INSERT INTO responses (surveyId, questionId, response) VALUES (11, 3, '3');
+INSERT INTO responses (surveyId, questionId, response) VALUES (11, 4, 'Okay');
+INSERT INTO responses (surveyId, questionId, response) VALUES (11, 5, 'Overall decent');
+
+INSERT INTO responses (surveyId, questionId, response) VALUES (12, 1, '4');
+INSERT INTO responses (surveyId, questionId, response) VALUES (12, 2, 'Overall good');
+INSERT INTO responses (surveyId, questionId, response) VALUES (12, 3, '5');
+INSERT INTO responses (surveyId, questionId, response) VALUES (12, 4, 'Amazing!');
+INSERT INTO responses (surveyId, questionId, response) VALUES (12, 5, 'Excellent experience');
 
 
 -- Insert Users
