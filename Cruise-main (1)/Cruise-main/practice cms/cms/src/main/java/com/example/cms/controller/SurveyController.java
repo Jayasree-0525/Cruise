@@ -71,6 +71,12 @@ public class SurveyController {
         return repository.findAll();
     }
 
+    @GetMapping("/surveys/{id}")
+    Survey retrieveSurvey(@PathVariable("id") int surveyId) {
+        return repository.findById(surveyId)
+                .orElseThrow(() -> new SurveyNotFoundException(surveyId));
+    }
+
     @PostMapping("/surveys")
     Survey createSurvey(@RequestBody SurveyDto surveyDto) {
         Survey newSurvey = new Survey();

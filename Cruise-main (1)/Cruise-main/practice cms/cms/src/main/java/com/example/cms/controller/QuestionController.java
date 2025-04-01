@@ -2,6 +2,7 @@ package com.example.cms.controller;
 
 import com.example.cms.model.entity.Question;
 import com.example.cms.model.repository.QuestionRepository;
+import com.example.cms.model.repository.ResponseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,9 @@ public class QuestionController {
 
     @Autowired
     private final QuestionRepository repository;
+
+    @Autowired
+    private ResponseRepository responseRepository;
 
     public QuestionController(QuestionRepository repository) {
         this.repository = repository;
@@ -30,7 +34,10 @@ public class QuestionController {
     }
 
     @DeleteMapping("/questions/{id}")
-    void deleteQuestion(@PathVariable("id") int questionId) {repository.deleteById(questionId);}
+    void deleteQuestion(@PathVariable("id") int questionId) {
+        responseRepository.deleteResponsesBySingleQuestionId(questionId);
+        repository.deleteById(questionId);
+    }
 
     @PutMapping("/questions/{id}")
     Question updateQuestion(@RequestBody Question newQuestion, @PathVariable("id") int questionId){

@@ -34,6 +34,13 @@ public interface ResponseRepository extends JpaRepository<Response, ResponseKey>
     @Query(value = "DELETE FROM responses WHERE surveyId = :sId", nativeQuery = true)
     void deleteResponsesBySingleSurveyId(@Param("sId") int sId);
 
+    //Delete question process
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM responses WHERE questionId = :qId", nativeQuery = true)
+    void deleteResponsesBySingleQuestionId(@Param("qId") int qId);
+
+
     //Delete response process
     @Modifying
     @Transactional
