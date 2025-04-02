@@ -79,6 +79,30 @@ public interface ResponseRepository extends JpaRepository<Response, ResponseKey>
             "where questionId = :qId", nativeQuery = true)
     float sdFunc(@Param("qId") int qId);
 
+    // Get average response for a given question and cruise
+    @Query(value = "SELECT AVG(CAST(r.response AS FLOAT)) " +
+            "FROM responses r " +
+            "JOIN survey s ON r.surveyId = s.surveyId " +
+            "WHERE r.questionId = :qId AND s.cruiseId = :cruiseId",
+            nativeQuery = true)
+    float averageResponseByQuestionAndCruise(@Param("qId") int questionId, @Param("cruiseId") int cruiseId);
+
+    // Get min response for a given question and cruise
+    @Query(value = "SELECT MIN(CAST(r.response AS FLOAT)) " +
+            "FROM responses r " +
+            "JOIN survey s ON r.surveyId = s.surveyId " +
+            "WHERE r.questionId = :qId AND s.cruiseId = :cruiseId",
+            nativeQuery = true)
+    float minResponseByQuestionAndCruise(@Param("qId") int questionId, @Param("cruiseId") int cruiseId);
+
+
+    // Get max response for a given question and cruise
+    @Query(value = "SELECT MAX(CAST(r.response AS FLOAT)) " +
+            "FROM responses r " +
+            "JOIN survey s ON r.surveyId = s.surveyId " +
+            "WHERE r.questionId = :qId AND s.cruiseId = :cruiseId",
+            nativeQuery = true)
+    float maxResponseByQuestionAndCruise(@Param("qId") int questionId, @Param("cruiseId") int cruiseId);
 
     // qualitative - search for instances of a word
     @Query(value = "select * from responses r " +

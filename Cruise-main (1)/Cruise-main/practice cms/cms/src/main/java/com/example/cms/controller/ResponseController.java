@@ -143,6 +143,26 @@ public class ResponseController {
     }
 
 
+    // quantitative - avg based on question and cruise Id
+    @GetMapping("/responses/quant/average/{questionId}/{cruiseId}")
+    float avgQuestionCruise(@PathVariable("questionId") int questionId, @PathVariable("cruiseId") int cruiseId) {
+        return repository.averageResponseByQuestionAndCruise(questionId, cruiseId);
+    }
+
+    // quantitative - min based on question and cruise Id
+    @GetMapping("/responses/quant/min/{questionId}/{cruiseId}")
+    float minQuestionCruise(@PathVariable("questionId") int questionId, @PathVariable("cruiseId") int cruiseId) {
+        return repository.minResponseByQuestionAndCruise(questionId, cruiseId);
+    }
+
+    // quantitative - max based on question and cruise Id
+    @GetMapping("/responses/quant/max/{questionId}/{cruiseId}")
+    float maxQuestionCruise(@PathVariable("questionId") int questionId, @PathVariable("cruiseId") int cruiseId) {
+        return repository.maxResponseByQuestionAndCruise(questionId, cruiseId);
+    }
+
+
+
     // qualitative - search for instances of a word
     @GetMapping("/responses/qual/search/{searchstring}")
     List<Response> searchKeyWord(@PathVariable("searchstring") String searchString) {
