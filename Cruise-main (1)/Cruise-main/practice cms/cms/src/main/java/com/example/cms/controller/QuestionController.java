@@ -1,5 +1,8 @@
 package com.example.cms.controller;
 
+import com.example.cms.controller.exceptions.CustomerNotFoundException;
+import com.example.cms.controller.exceptions.QuestionNotFoundException;
+import com.example.cms.model.entity.Customer;
 import com.example.cms.model.entity.Question;
 import com.example.cms.model.repository.QuestionRepository;
 import com.example.cms.model.repository.ResponseRepository;
@@ -26,6 +29,11 @@ public class QuestionController {
     @GetMapping("/questions")
     List<Question> retrieveAllQuestions() {
         return repository.findAll();
+    }
+
+    @GetMapping("/questions/{id}")
+    Question retrieveQuestion(@PathVariable("id") int questionId) {
+        return repository.findById(questionId).orElseThrow(() -> new QuestionNotFoundException(questionId));
     }
 
     @PostMapping("/questions")

@@ -2,6 +2,7 @@ package com.example.cms.controller;
 
 import com.example.cms.controller.dto.ResponseDto;
 import com.example.cms.controller.exceptions.QuestionNotFoundException;
+import com.example.cms.controller.exceptions.ResponseNotFoundException;
 import com.example.cms.controller.exceptions.SurveyNotFoundException;
 import com.example.cms.model.entity.Survey;
 import com.example.cms.model.entity.Question;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -35,6 +37,11 @@ public class ResponseController {
     @GetMapping("/responses")
     List<Response> retrieveAllResponses() {
         return repository.findAll();
+    }
+
+    @GetMapping("/responses/{surveyId}/{questionId}")
+    Optional<Response> getResponse(@PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
+        return repository.findById(new ResponseKey(surveyId, questionId));
     }
 
     @PostMapping("/responses")

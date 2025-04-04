@@ -1,6 +1,12 @@
 package com.example.cms.controller;
 
+import com.example.cms.controller.dto.SurveyDto;
+import com.example.cms.controller.exceptions.CruiseNotFoundException;
+import com.example.cms.controller.exceptions.CustomerNotFoundException;
+import com.example.cms.controller.exceptions.SurveyNotFoundException;
+import com.example.cms.model.entity.Cruise;
 import com.example.cms.model.entity.Customer;
+import com.example.cms.model.entity.Survey;
 import com.example.cms.model.repository.CustomerRepository;
 import com.example.cms.model.repository.ResponseRepository;
 import com.example.cms.model.repository.SurveyRepository;
@@ -31,8 +37,23 @@ public class CustomerController {
         return repository.findAll();
     }
 
+    @GetMapping("/customers/{id}")
+    Customer retrieveCustomer(@PathVariable("id") int customerId) {
+        return repository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException(customerId));
+    }
+
     @PostMapping("/customers")
-    Customer createCustomer(@RequestBody Customer newCustomer) {return repository.save(newCustomer);}
+    Customer createCustomer(@RequestBody Customer customer) {
+        Customer newCustomer = new Customer();
+        newCustomer.setId(customer.getId());
+        newCustomer.setFirstName(customer.getFirstName());
+        newCustomer.setLastName(customer.getLastName());
+        newCustomer.setEmail(customer.getEmail());
+        newCustomer.setAge(customer.getAge());
+        newCustomer.setGender(customer.getGender());
+        return repository.save(newCustomer);
+    }
+
 
     @DeleteMapping("/customers/{id}")
     void deleteCustomer(@PathVariable("id") int customerId) {
