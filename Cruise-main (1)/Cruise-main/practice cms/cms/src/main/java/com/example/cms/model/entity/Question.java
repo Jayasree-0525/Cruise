@@ -29,16 +29,6 @@ public class Question {
     private String question;
 
     @NotEmpty
-    private String type; // qualitative or quantitative
-
-    //@OneToMany(mappedBy = "Response")
-    //@Nullable
-    //private String qualitativeAnswer;
-    //private List<Response> listOfresponses = new ArrayList<>();
-
-    //@Nullable
-    //private float quantitativeAnswer;
-
-
+    private String type; // qualitative or quantitative, both stored here
 
 }

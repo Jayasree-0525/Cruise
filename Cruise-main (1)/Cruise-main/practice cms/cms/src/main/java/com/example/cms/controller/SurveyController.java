@@ -66,17 +66,20 @@ public class SurveyController {
         this.repository = repository;
     }
 
+    //see all surveys
     @GetMapping("/surveys")
     List<Survey> retrieveAllSurveys() {
         return repository.findAll();
     }
 
+    //see specific survey based on id
     @GetMapping("/surveys/{id}")
     Survey retrieveSurvey(@PathVariable("id") int surveyId) {
         return repository.findById(surveyId)
                 .orElseThrow(() -> new SurveyNotFoundException(surveyId));
     }
 
+    //create new survey
     @PostMapping("/surveys")
     Survey createSurvey(@RequestBody SurveyDto surveyDto) {
         Survey newSurvey = new Survey();
@@ -91,12 +94,16 @@ public class SurveyController {
         return repository.save(newSurvey);
     }
 
+    //delete a survey
     @DeleteMapping("/surveys/{id}")
     void deleteSurvey(@PathVariable("id") int surveyId) {
+        //delete all reponses related to survey first (get rid of dependencies)
         responseRepository.deleteResponsesBySingleSurveyId(surveyId);
+        //then delete the survey
         repository.deleteById(surveyId);
     }
 
+    //edit existing survey
     @PutMapping("/surveys/{id}")
     Survey updateSurvey(@RequestBody SurveyDto surveyDto, @PathVariable("id") int surveyId) {
         return repository.findById(surveyId)

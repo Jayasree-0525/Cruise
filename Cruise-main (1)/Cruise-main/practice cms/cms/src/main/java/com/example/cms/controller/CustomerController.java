@@ -32,16 +32,19 @@ public class CustomerController {
         this.repository = repository;
     }
 
+    //Get all customers
     @GetMapping("/customers")
     List<Customer> retrieveAllCustomers() {
         return repository.findAll();
     }
 
+    //Get specific customer based on Id
     @GetMapping("/customers/{id}")
     Customer retrieveCustomer(@PathVariable("id") int customerId) {
         return repository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException(customerId));
     }
 
+    //Create a new customer
     @PostMapping("/customers")
     Customer createCustomer(@RequestBody Customer customer) {
         Customer newCustomer = new Customer();
@@ -54,15 +57,19 @@ public class CustomerController {
         return repository.save(newCustomer);
     }
 
-
+    //Delete customer
     @DeleteMapping("/customers/{id}")
     void deleteCustomer(@PathVariable("id") int customerId) {
+        //delete all responses related to customers first
         List<Integer> surveysIdsByCustomerId = responseRepository.findSurveyIdsByCustomerId(customerId);
         responseRepository.deleteResponsesBySurveyIds(surveysIdsByCustomerId);
+        //delete all surveys related to customer next
         surveyRepository.deleteSurveyByCustomerId(customerId);
+        //finally delete customer after removing dependencies
         repository.deleteById(customerId);
     }
 
+    //Edit customer details
     @PutMapping("/customers/{id}")
     Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable("id") int customerId){
         return repository.findById(customerId)

@@ -26,27 +26,32 @@ public class QuestionController {
         this.repository = repository;
     }
 
+    //see all the questions in the database
     @GetMapping("/questions")
     List<Question> retrieveAllQuestions() {
         return repository.findAll();
     }
 
+    //see specific question based on id
     @GetMapping("/questions/{id}")
     Question retrieveQuestion(@PathVariable("id") int questionId) {
         return repository.findById(questionId).orElseThrow(() -> new QuestionNotFoundException(questionId));
     }
 
+    //create new question
     @PostMapping("/questions")
     Question createQuestion(@RequestBody Question newQuestion) {
         return repository.save(newQuestion);
     }
 
+    //delete question
     @DeleteMapping("/questions/{id}")
     void deleteQuestion(@PathVariable("id") int questionId) {
         responseRepository.deleteResponsesBySingleQuestionId(questionId);
         repository.deleteById(questionId);
     }
 
+    //update/edit a question
     @PutMapping("/questions/{id}")
     Question updateQuestion(@RequestBody Question newQuestion, @PathVariable("id") int questionId){
         return repository.findById(questionId)

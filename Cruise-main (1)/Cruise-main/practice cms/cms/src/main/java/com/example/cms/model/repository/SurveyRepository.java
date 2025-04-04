@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 public interface SurveyRepository extends JpaRepository<Survey, Integer>{
-    //List<Survey> findAll();
 
     // delete survey by customer id
     @Modifying

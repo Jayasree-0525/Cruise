@@ -34,16 +34,19 @@ public class ResponseController {
         this.repository = repository;
     }
 
+    //see all responses
     @GetMapping("/responses")
     List<Response> retrieveAllResponses() {
         return repository.findAll();
     }
 
+    //see specific response based on survey and question id
     @GetMapping("/responses/{surveyId}/{questionId}")
     Optional<Response> getResponse(@PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
         return repository.findById(new ResponseKey(surveyId, questionId));
     }
 
+    //create/post a new response to a question
     @PostMapping("/responses")
     Response createResponse(@RequestBody ResponseDto responseDto) {
         Response newResponse = new Response();
@@ -58,25 +61,13 @@ public class ResponseController {
         return repository.save(newResponse);
     }
 
+    //delete response
     @DeleteMapping("/responses/{surveyId}/{questionId}")
     void deleteResponse(@PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
         repository.deleteResponseByQuestionAndSurvey(questionId, surveyId);
     }
 
-    /*@PutMapping("/responses/{id}")
-    Response updateResponse(@RequestBody Response newResponse, @PathVariable("id") String responseId){
-        return repository.findById(responseId)
-                .map(response -> {
-                    response.setResponse(newResponse.getResponse());
-                    return repository.save(response);
-                })
-                .orElseGet(() -> {
-                    newResponse.setResponseId(responseId);
-                    newResponse.setResponse(newResponse.getResponse());
-                    return repository.save(newResponse);
-                });
-    }*/
-
+    //edit response
     @PutMapping("/responses/{surveyId}/{questionId}")
     Response updateResponse(@RequestBody ResponseDto responseDto, @PathVariable("surveyId") int surveyId, @PathVariable("questionId") int questionId) {
         return repository.findById(new ResponseKey(surveyId, questionId))
@@ -108,6 +99,7 @@ public class ResponseController {
                 });
     }
 
+    //SQL queries to calculate/display collected data and analytics
     // quantitative - average
     @GetMapping("/responses/quant/average/{questionId}")
     float quant_avg(@PathVariable("questionId") int questionId) {
@@ -167,8 +159,6 @@ public class ResponseController {
     float maxQuestionCruise(@PathVariable("questionId") int questionId, @PathVariable("cruiseId") int cruiseId) {
         return repository.maxResponseByQuestionAndCruise(questionId, cruiseId);
     }
-
-
 
     // qualitative - search for instances of a word
     @GetMapping("/responses/qual/search/{searchstring}")
