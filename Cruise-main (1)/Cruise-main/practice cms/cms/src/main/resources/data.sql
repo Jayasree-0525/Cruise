@@ -225,7 +225,20 @@ INSERT INTO responses (surveyId, questionId, response) VALUES (25, 5, 'The exper
 
 
 -- Insert Users
-INSERT INTO users (username, password, isAdmin) VALUES ('alice', 'abc', false);
-INSERT INTO users (username, password, isAdmin) VALUES ('bob', 'p123', false);
-INSERT INTO users (username, password, isAdmin) VALUES ('aaa', '123', false);
-INSERT INTO users (username, password, isAdmin) VALUES ('abc', '123', true);
+INSERT INTO users (username, password, isAdmin) VALUES ('nikita.shashidhar@email.com', '6', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('rangajah.manoharan@email.com', '7', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('taleen.kutob@email.com', '8', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('liam.brown@email.com', '9', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('james.smith@email.com', '10', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('evelyn.king@email.com', '11', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('anna.lee@email.com', '12', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('harold.baker@email.com', '13', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('lily.woods@email.com', '14', false);
+INSERT INTO users (username, password, isAdmin) VALUES ('thomas.queen@email.com', '15', false);
+
+
+INSERT INTO users (username, password, isAdmin) VALUES ('sarah.wong@royalcaribbean.com', '1', true);
+INSERT INTO users (username, password, isAdmin) VALUES ('bhoovi.handa@royalcaribbean.com', '2', true);
+INSERT INTO users (username, password, isAdmin) VALUES ('dhyani.thakar@royalcaribbean.com', '3', true);
+INSERT INTO users (username, password, isAdmin) VALUES ('emma.gillott@royalcaribbean.com', '4', true);
+INSERT INTO users (username, password, isAdmin) VALUES ('jayasree.sreeram@royalcaribbean.com', '5', true);
