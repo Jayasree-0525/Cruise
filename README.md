@@ -32,3 +32,5 @@ and elevated guest experiences.
   - Search for keywords in qualitative feedback
   - View statistical trends across cruises, destinations, or specific questions
 
+### This web application was part of a project completed for MIE350 (Design and analysis of information systems) at the University Of Toronto. 
+### Date: Apr 7th, 2025
